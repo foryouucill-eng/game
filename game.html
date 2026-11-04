@@ -6,11 +6,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Truth or Dare Couple ♡</title>
 
-
 <style>
-*{
- box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
  margin:0;
@@ -19,14 +16,11 @@ body{
  font-family:Georgia,'Times New Roman',serif;
  color:#873e61;
  background:
-  radial-gradient(circle at top,#fff8fc 0%,transparent 45%),
-  linear-gradient(135deg,#ffeaf4,#fbd0e4,#fff4f8);
+ radial-gradient(circle at top,#fff8fc 0%,transparent 45%),
+ linear-gradient(135deg,#ffeaf4,#fbd0e4,#fff4f8);
 }
 
-main{
- max-width:650px;
- margin:auto;
-}
+main{max-width:650px;margin:auto}
 
 h1{
  text-align:center;
@@ -34,6 +28,8 @@ h1{
  font-size:clamp(28px,6vw,42px);
  letter-spacing:1px;
 }
+
+h3{color:#bd5688}
 
 .card{
  background:rgba(255,255,255,.72);
@@ -62,10 +58,7 @@ input:focus,textarea:focus{
  box-shadow:0 0 0 3px #f8d6e7;
 }
 
-textarea{
- min-height:100px;
- resize:vertical;
-}
+textarea{min-height:100px;resize:vertical}
 
 button{
  padding:13px 18px;
@@ -88,7 +81,6 @@ button:disabled{
  opacity:.45;
  cursor:not-allowed;
  transform:none;
- box-shadow:none;
 }
 
 .secondary{
@@ -96,22 +88,16 @@ button:disabled{
  color:#873e61;
 }
 
-/* LAYOUT */
 .row{
  display:flex;
  gap:10px;
  margin-top:10px;
 }
 
-.row button{
- flex:1;
-}
+.row button{flex:1}
 
-.hidden{
- display:none!important;
-}
+.hidden{display:none!important}
 
-/* STATUS ROOM */
 .status{
  background:#fff0f6;
  padding:12px;
@@ -120,19 +106,6 @@ button:disabled{
  font-size:14px;
 }
 
-/* QUESTION */
-.question{
- background:#fff0f6;
- padding:20px;
- border:1px solid #f8d5e7;
- border-radius:18px;
- text-align:center;
- font-size:20px;
- line-height:1.6;
- margin:15px 0;
-}
-
-/* ANSWER */
 .answer{
  background:#fff8fc;
  border:1px solid #f5d5e5;
@@ -143,58 +116,89 @@ button:disabled{
  overflow-wrap:anywhere;
 }
 
-small{
- color:#b17491;
+small{color:#b17491}
+
+hr{
+ border:0;
+ border-top:1px solid #f0c8dc;
+ margin:25px 0;
 }
 
-/* TRUTH OR DARE CARDS */
+/* CARD AREA */
+
 .tod-cards{
  display:flex;
  justify-content:center;
  gap:18px;
- margin:25px 0;
+ margin:30px 0;
  flex-wrap:wrap;
 }
 
 .tod-card{
  width:180px;
  height:255px;
- padding:8px;
- border-radius:20px;
+ perspective:1000px;
  cursor:pointer;
+ background:transparent;
+ padding:0;
+ border:0;
+ box-shadow:none;
  transition:.3s;
- box-shadow:0 12px 30px #bd598522;
-}
-
-.truth-card{
- background:linear-gradient(145deg,#f8b9d5,#e88bb8);
-}
-
-.dare-card{
- background:linear-gradient(145deg,#f4c6dc,#d77cab);
 }
 
 .card-inner{
+ position:relative;
+ width:100%;
  height:100%;
- border:1px solid #ffffffa8;
- border-radius:15px;
+ transform-style:preserve-3d;
+ transition:transform .75s cubic-bezier(.2,.7,.3,1);
+}
+
+.tod-card.open .card-inner{
+ transform:rotateY(180deg);
+}
+
+.card-front,
+.card-back{
+ position:absolute;
+ inset:0;
+ border-radius:20px;
+ backface-visibility:hidden;
+ -webkit-backface-visibility:hidden;
  display:flex;
  flex-direction:column;
  align-items:center;
  justify-content:center;
- background:#ffffff25;
- color:white;
  text-align:center;
+ padding:16px;
+ overflow-wrap:anywhere;
 }
 
-.tod-card:hover{
- transform:translateY(-8px) rotate(-2deg);
- box-shadow:0 18px 35px #bd598540;
+.card-front{
+ color:white;
+ border:2px solid white;
+ box-shadow:0 12px 30px #bd598522;
+}
+
+.truth-card .card-front{
+ background:linear-gradient(145deg,#f8b9d5,#e88bb8);
+}
+
+.dare-card .card-front{
+ background:linear-gradient(145deg,#f4c6dc,#d77cab);
+}
+
+.card-back{
+ transform:rotateY(180deg);
+ color:#873e61;
+ border:2px solid white;
+ box-shadow:0 12px 30px #bd598522;
+ background:linear-gradient(145deg,#fff0f7,#f8c9df);
 }
 
 .card-heart{
- font-size:45px;
- margin-bottom:10px;
+ font-size:48px;
+ margin-bottom:12px;
 }
 
 .card-type{
@@ -206,7 +210,7 @@ small{
 .card-sub{
  font-size:12px;
  font-style:italic;
- margin-top:8px;
+ margin-top:10px;
 }
 
 .card-decor{
@@ -214,120 +218,196 @@ small{
  letter-spacing:5px;
 }
 
-/* MOBILE */
+.card-back .card-type{
+ font-size:14px;
+ letter-spacing:3px;
+ margin-bottom:15px;
+}
+
+.card-question{
+ font-size:16px;
+ line-height:1.6;
+ font-weight:bold;
+}
+
+.card-hint{
+ font-size:11px;
+ margin-top:18px;
+ font-style:italic;
+ opacity:.8;
+}
+
+.tod-card:hover{
+ transform:translateY(-5px);
+}
+
+.tod-card.open:hover{
+ transform:none;
+}
+
+.tod-card:active{
+ transform:scale(.98);
+}
+
+.card-back .card-question{
+ max-height:175px;
+ overflow-y:auto;
+}
+
+/* INFO */
+
+.game-note{
+ text-align:center;
+ font-size:13px;
+ color:#b17491;
+ margin-top:8px;
+}
+
 @media(max-width:480px){
- body{
-  padding:14px;
- }
-
- .card{
-  padding:18px;
- }
-
- .tod-card{
-  width:145px;
-  height:220px;
- }
-
- .card-type{
-  font-size:21px;
- }
-
- .question{
-  font-size:18px;
- }
+ body{padding:14px}
+ .card{padding:18px}
+ .tod-card{width:145px;height:220px}
+ .card-type{font-size:21px}
+ .card-question{font-size:14px}
 }
 </style>
-
 </head>
 
 <body>
 <main>
+
 <h1>Truth or Dare ♡</h1>
 <p style="text-align:center">a little game for the two of us</p>
 
+<!-- SETUP ROOM -->
 <div class="card" id="setup">
 <h3>♡ Masuk permainan</h3>
+
 <label>Nama kamu</label>
 <input id="name" placeholder="Nama panggilan">
+
 <label>Kode room</label>
-<input id="code" placeholder="Kode room">
+<input id="code" placeholder="Kode room" autocomplete="off">
+
 <div class="row">
 <button onclick="createRoom()">Buat room</button>
 <button class="secondary" onclick="joinRoom()">Gabung</button>
 </div>
+
 <div id="message" class="status"></div>
 </div>
 
-<div class="card" id="game">
+<!-- GAME -->
+<div class="card hidden" id="game">
+
 <h3>Room ♡ <span id="room"></span></h3>
+
 <button class="secondary" onclick="copyCode()">Salin kode room</button>
+
 <div class="status" id="players"></div>
 <div class="status" id="turn"></div>
 
-
+<!-- FLIP CARDS -->
 <div class="tod-cards">
-  <div class="tod-card truth-card" onclick="choose('truth')">
-    <div class="card-inner">
-      <span class="card-heart">♡</span>
-      <span class="card-type">TRUTH</span>
-      <span class="card-sub">tell me honestly</span>
-      <span class="card-decor">✦ ♡ ✦</span>
-    </div>
-  </div>
 
-  <div class="tod-card dare-card" onclick="choose('dare')">
-    <div class="card-inner">
-      <span class="card-heart">♥</span>
-      <span class="card-type">DARE</span>
-      <span class="card-sub">take the challenge</span>
-      <span class="card-decor">✦ ♥ ✦</span>
-    </div>
-  </div>
+<!-- TRUTH -->
+<div class="tod-card truth-card" id="truthCard"
+onclick="choose('truth')">
+
+<div class="card-inner">
+
+<div class="card-front">
+<span class="card-heart">♡</span>
+<span class="card-type">TRUTH</span>
+<span class="card-sub">tell me honestly</span>
+<span class="card-decor">✦ ♡ ✦</span>
 </div>
 
+<div class="card-back">
+<span class="card-type">♡ TRUTH ♡</span>
+<div class="card-question" id="truthQuestion">
+Pilih kartu Truth ♡
+</div>
+<span class="card-hint">answer honestly ♡</span>
+</div>
 
-<div class="question" id="question">Pilih Truth atau Dare ♡</div>
+</div>
+</div>
+
+<!-- DARE -->
+<div class="tod-card dare-card" id="dareCard"
+onclick="choose('dare')">
+
+<div class="card-inner">
+
+<div class="card-front">
+<span class="card-heart">♥</span>
+<span class="card-type">DARE</span>
+<span class="card-sub">take the challenge</span>
+<span class="card-decor">✦ ♥ ✦</span>
+</div>
+
+<div class="card-back">
+<span class="card-type">♥ DARE ♥</span>
+<div class="card-question" id="dareQuestion">
+Pilih kartu Dare ♡
+</div>
+<span class="card-hint">complete the challenge ♡</span>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<p class="game-note">♡ pilih kartu untuk membuka pertanyaan ♡</p>
 
 <div id="answerArea" class="hidden">
+<h3>♡ Jawaban kamu</h3>
 <textarea id="answer" placeholder="Tulis jawaban kamu..."></textarea>
-<button style="width:100%" onclick="sendAnswer()">Kirim jawaban ♡</button>
+<button style="width:100%" onclick="sendAnswer()">
+Kirim jawaban ♡
+</button>
 </div>
 
 <hr>
+
 <h3>♡ Jawaban kalian</h3>
 <div id="answers">Belum ada jawaban.</div>
+
 </div>
 </main>
 
 <script type="module">
+
 import {initializeApp} from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
- getDatabase,ref,set,get,update,push,onValue
+getDatabase,ref,set,get,update,push,onValue
 } from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-/* GANTI DENGAN CONFIG FIREBASE KAMU */
+/* FIREBASE CONFIG */
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAq_jql9O6CXAEjwFL9aMXms-AYDuWyKGI",
-  authDomain: "truthordare-d35ed.firebaseapp.com",
-  databaseURL: "https://truthordare-d35ed-default-rtdb.firebaseio.com",
-  projectId: "truthordare-d35ed",
-  storageBucket: "truthordare-d35ed.firebasestorage.app",
-  messagingSenderId: "620194251239",
-  appId: "1:620194251239:web:9ffe51436761db8202fd42",
-  measurementId: "G-GH0F42HMGS"
+const firebaseConfig={
+apiKey:"AIzaSyAq_jql9O6CXAEjwFL9aMXms-AYDuWyKGI",
+authDomain:"truthordare-d35ed.firebaseapp.com",
+databaseURL:"https://truthordare-d35ed-default-rtdb.firebaseio.com",
+projectId:"truthordare-d35ed",
+storageBucket:"truthordare-d35ed.firebasestorage.app",
+messagingSenderId:"620194251239",
+appId:"1:620194251239:web:9ffe51436761db8202fd42",
+measurementId:"G-GH0F42HMGS"
 };
-
 
 const app=initializeApp(firebaseConfig);
 const db=getDatabase(app);
 
 const $=id=>document.getElementById(id);
+
 let nama="",room="",uid="",data={},myTurn=false;
+let unsubscribe=null;
 
 const truth=[
 "Apa hal pertama yang bikin kamu suka aku?",
@@ -337,7 +417,9 @@ const truth=[
 "Apa date impian kita?",
 "Apa panggilan kesukaanmu dariku?",
 "Apa yang bikin kamu merasa disayang?",
-"Apa satu hal yang ingin kita lakukan bersama?"
+"Apa satu hal yang ingin kita lakukan bersama?",
+"Hal apa yang paling kamu rindukan dariku?",
+"Apa yang ingin kamu katakan tapi belum pernah?"
 ];
 
 const dare=[
@@ -348,135 +430,282 @@ const dare=[
 "Kirim 5 emoji love.",
 "Tulis rencana date impian kita.",
 "Nyatakan cinta dengan cara paling lucu.",
-"Pilih lagu yang mengingatkanmu padaku."
+"Pilih lagu yang mengingatkanmu padaku.",
+"Tulis surat cinta singkat untukku.",
+"Beri aku panggilan sayang baru."
 ];
 
 const playerKey=()=> "p_"+uid;
 const roomRef=()=>ref(db,"rooms/"+room);
 
-function showMessage(t){$("message").textContent=t}
+function showMessage(t){
+$("message").textContent=t;
+}
 
 async function createRoom(){
- nama=$("name").value.trim();
- if(!nama)return showMessage("Isi nama kamu dulu ♡");
- room=Math.random().toString(36).substring(2,8).toUpperCase();
- $("code").value=room;
- await enter(true);
+
+nama=$("name").value.trim();
+
+if(!nama){
+return showMessage("Isi nama kamu dulu ♡");
+}
+
+room=Math.random().toString(36).substring(2,8).toUpperCase();
+$("code").value=room;
+
+await enter(true);
 }
 
 async function joinRoom(){
- nama=$("name").value.trim();
- room=$("code").value.trim().toUpperCase();
- if(!nama||!room)return showMessage("Isi nama dan kode room.");
- await enter(false);
+
+nama=$("name").value.trim();
+room=$("code").value.trim().toUpperCase();
+
+if(!nama||!room){
+return showMessage("Isi nama dan kode room.");
+}
+
+await enter(false);
 }
 
 async function enter(create){
- uid=localStorage.getItem("couple_uid")||
- "id_"+Math.random().toString(36).slice(2);
- localStorage.setItem("couple_uid",uid);
 
- try{
-  const r=roomRef();
-  const snap=await get(r);
+uid=localStorage.getItem("couple_uid");
 
-  if(create){
-   await set(r,{players:{},answers:{},turn:null,current:null});
-  }else if(!snap.exists()){
-   return showMessage("Room tidak ditemukan ♡");
-  }
-
-  await set(ref(db,"rooms/"+room+"/players/"+playerKey()),
-  {name:nama});
-
-  const latest=(await get(r)).val();
-  const keys=Object.keys(latest.players||{});
-
-  if(keys.length===1)await update(r,{turn:keys[0]});
-
-  $("setup").classList.add("hidden");
-  $("game").classList.remove("hidden");
-  $("room").textContent=room;
-
-  onValue(r,s=>{
-   if(!s.exists())return;
-   data=s.val();
-   render();
-  });
- }catch(e){
-  showMessage("Firebase belum tersambung. Periksa config.");
- }
+if(!uid){
+uid="id_"+Math.random().toString(36).slice(2);
+localStorage.setItem("couple_uid",uid);
 }
+
+try{
+
+const r=roomRef();
+const snap=await get(r);
+
+if(create){
+
+await set(r,{
+players:{},
+answers:{},
+turn:null,
+current:null
+});
+
+}else{
+
+if(!snap.exists()){
+return showMessage("Room tidak ditemukan ♡");
+}
+
+const existing=snap.val().players||{};
+if(Object.keys(existing).length>=2){
+return showMessage("Room sudah penuh ♡");
+}
+
+}
+
+await set(
+ref(db,"rooms/"+room+"/players/"+playerKey()),
+{name:nama}
+);
+
+const latest=(await get(r)).val();
+const keys=Object.keys(latest.players||{});
+
+if(keys.length===1){
+await update(r,{turn:keys[0]});
+}
+
+$("setup").classList.add("hidden");
+$("game").classList.remove("hidden");
+$("room").textContent=room;
+
+if(unsubscribe)unsubscribe();
+
+unsubscribe=onValue(r,s=>{
+
+if(!s.exists())return;
+
+data=s.val();
+render();
+
+});
+
+}catch(e){
+
+console.error(e);
+showMessage("Firebase error: "+e.message);
+
+}
+
+}
+
+/* RENDER GAME */
 
 function render(){
- const players=Object.entries(data.players||{});
- myTurn=data.turn===playerKey();
 
- $("players").textContent="Pemain: "+
- players.map(p=>p[1].name).join(" & ");
+const players=Object.entries(data.players||{});
 
- $("turn").textContent=players.length<2?
- "Menunggu pasangan bergabung ♡":
- myTurn?"Giliran kamu ♡":"Giliran pasanganmu ♡";
+myTurn=data.turn===playerKey();
 
- $("question").textContent=data.current?.text||
- "Pilih Truth atau Dare ♡";
+$("players").textContent="Pemain: "+
+players.map(p=>p[1].name).join(" & ");
 
- $("answerArea").classList.toggle("hidden",
- !myTurn||!data.current||data.current.answered);
+$("turn").textContent=players.length<2
+?"Menunggu pasangan bergabung ♡"
+:myTurn
+?"Giliran kamu ♡"
+:"Giliran pasanganmu ♡";
 
- const answers=Object.values(data.answers||{});
- $("answers").innerHTML=answers.length?
- answers.map(a=>`<div class="answer"><b>♡ ${esc(a.name)}</b><br>${esc(a.text)}<br><small>${esc(a.type)}</small></div>`).join("")
- :"Belum ada jawaban.";
+/* CARD FLIP */
+
+const current=data.current;
+
+$("truthCard").classList.toggle(
+"open",current?.type==="truth"
+);
+
+$("dareCard").classList.toggle(
+"open",current?.type==="dare"
+);
+
+$("truthQuestion").textContent=
+current?.type==="truth"
+?current.text
+:"Pilih kartu Truth ♡";
+
+$("dareQuestion").textContent=
+current?.type==="dare"
+?current.text
+:"Pilih kartu Dare ♡";
+
+/* ANSWER AREA */
+
+$("answerArea").classList.toggle(
+"hidden",
+!myTurn||!current||current.answered
+);
+
+/* ANSWERS */
+
+const answers=Object.values(data.answers||{});
+
+$("answers").innerHTML=answers.length
+?answers.map(a=>
+`<div class="answer">
+<b>♡ ${esc(a.name)}</b><br>
+${esc(a.text)}<br>
+<small>${esc(a.type)}</small>
+</div>`
+).join("")
+:"Belum ada jawaban.";
+
 }
+
+/* ESCAPE HTML */
 
 function esc(t){
- return String(t).replace(/[&<>"']/g,c=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",
- '"':"&quot;","'":"&#39;"
- }[c]));
+
+return String(t).replace(/[&<>"']/g,c=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+}[c]));
+
 }
+
+/* CHOOSE CARD */
 
 async function choose(type){
- if(!myTurn)return alert("Tunggu giliran kamu ♡");
- const list=type==="truth"?truth:dare;
- const text=list[Math.floor(Math.random()*list.length)];
 
- await update(roomRef(),{
- current:{text,type,answered:false},
- turn:playerKey()
- });
+if(!myTurn){
+return alert("Tunggu giliran kamu ♡");
 }
+
+if(Object.keys(data.players||{}).length<2){
+return alert("Tunggu pasangan bergabung dulu ♡");
+}
+
+if(data.current&&!data.current.answered){
+return alert("Jawab pertanyaan sebelumnya dulu ♡");
+}
+
+const list=type==="truth"?truth:dare;
+const text=list[Math.floor(Math.random()*list.length)];
+
+await update(roomRef(),{
+current:{
+text,
+type,
+answered:false
+},
+turn:playerKey()
+});
+
+}
+
+/* SEND ANSWER */
 
 async function sendAnswer(){
- const text=$("answer").value.trim();
- if(!text)return alert("Isi jawaban dulu ♡");
 
- await push(ref(db,"rooms/"+room+"/answers"),{
- name:nama,text,type:data.current.type
- });
+const text=$("answer").value.trim();
 
- const keys=Object.keys(data.players||{});
- const next=keys.find(k=>k!==playerKey())||playerKey();
-
- await update(roomRef(),{
- current:{...data.current,answered:true},
- turn:next
- });
- $("answer").value="";
+if(!text){
+return alert("Isi jawaban dulu ♡");
 }
+
+if(!data.current){
+return alert("Pilih kartu terlebih dahulu ♡");
+}
+
+await push(
+ref(db,"rooms/"+room+"/answers"),
+{
+name:nama,
+text,
+type:data.current.type
+}
+);
+
+const keys=Object.keys(data.players||{});
+const next=keys.find(k=>k!==playerKey())||playerKey();
+
+await update(roomRef(),{
+current:{
+...data.current,
+answered:true
+},
+turn:next
+});
+
+$("answer").value="";
+
+}
+
+/* COPY ROOM */
 
 async function copyCode(){
- await navigator.clipboard.writeText(room);
- alert("Kode room tersalin ♡");
+
+try{
+await navigator.clipboard.writeText(room);
+alert("Kode room tersalin ♡");
+}catch(e){
+alert("Kode room: "+room);
 }
+
+}
+
+/* EXPOSE FUNCTIONS */
 
 window.createRoom=createRoom;
 window.joinRoom=joinRoom;
 window.choose=choose;
 window.sendAnswer=sendAnswer;
 window.copyCode=copyCode;
+
 </script>
+
 </body>
 </html>
