@@ -93,13 +93,18 @@ import {
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 /* GANTI DENGAN CONFIG FIREBASE KAMU */
-const firebaseConfig={
- apiKey:"PASTE_API_KEY",
- authDomain:"PASTE_PROJECT_ID.firebaseapp.com",
- databaseURL:"https://PASTE_PROJECT_ID-default-rtdb.firebaseio.com",
- projectId:"PASTE_PROJECT_ID",
- appId:"PASTE_APP_ID"
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAq_jql9O6CXAEjwFL9aMXms-AYDuWyKGI",
+  authDomain: "truthordare-d35ed.firebaseapp.com",
+  databaseURL: "https://truthordare-d35ed-default-rtdb.firebaseio.com",
+  projectId: "truthordare-d35ed",
+  storageBucket: "truthordare-d35ed.firebasestorage.app",
+  messagingSenderId: "620194251239",
+  appId: "1:620194251239:web:9ffe51436761db8202fd42",
+  measurementId: "G-GH0F42HMGS"
 };
+
 
 const app=initializeApp(firebaseConfig);
 const db=getDatabase(app);
